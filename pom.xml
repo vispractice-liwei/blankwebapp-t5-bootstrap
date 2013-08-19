@@ -7,36 +7,70 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>blankwebapp-t5-bootstrap Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
+	<properties>
+		<spring.version>3.2.3.RELEASE</spring.version>
+		<jpa.version>2.0.0</jpa.version>
+		<junit.version>4.11</junit.version>
+		<hibernate.version>4.2.2.Final</hibernate.version>
+		<hibernate.jpa.version>1.0.0.Final</hibernate.jpa.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<aspectj.version>1.6.12</aspectj.version>
+		<jodatime.version>2.2</jodatime.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.data.jpa.version>1.3.4.RELEASE</spring.data.jpa.version>
+		<tapestry.jquery.version>3.3.6</tapestry.jquery.version>
+		<tapestry.version>5.3.6</tapestry.version>
+		<h2.version>1.0.71</h2.version>
+		<gson.version>1.7.1</gson.version>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.got5</groupId>
 			<artifactId>tapestry5-jquery</artifactId>
-			<version>3.3.6</version>
+			<version>${tapestry.jquery.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-spring</artifactId>
-			<version>5.3.6</version>
+			<version>${tapestry.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.0.71</version>
+			<version>${h2.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.6.10</version>
+			<version>${aspectj.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>1.7.1</version>
+			<version>${gson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring.data.jpa.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>${hibernate.jpa.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 	<build>
