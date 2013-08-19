@@ -1,0 +1,13 @@
+<html t:type="layout" title="t5-demo Index"
+	t:sidebarTitle="Framework Version"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	xmlns:p="tapestry:parameter">
+<!-- Most of the page content, including <head>, <body>, etc. tags, comes from Layout.tml -->
+
+<main class="bs-masthead" id="content" role="main">
+<div class="container">
+	<h2>Vispractice blank webapp with tapestry and Bootstrap</h2>
+</div>
+</main>
+
+</html>

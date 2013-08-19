@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	xmlns:p="tapestry:parameter">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>${title}</title>
+</head>
+<body class="bs-docs-home">
+	<a class="sr-only" href="#content">Skip navigation</a>
+
+	<!-- Docs master nav -->
+	<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav"
+		role="banner">
+		<div class="container">
+			<nav class="collapse navbar-collapse bs-navbar-collapse"
+				role="navigation">
+				<ul class="nav navbar-nav">
+					<li t:type="loop" source="pageNames" value="pageName"
+						class="prop:classForPageName"><t:pagelink
+							page="prop:pageName">${pageName}</t:pagelink></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Page content of course! -->
+	<t:body />
+
+	<footer class="container" role="contentinfo">
+		<ul class="bs-masthead-links">
+			<li><a href="http://www.vispractice.com" target="_blank">Vispractice</a></li>
+		</ul>
+	</footer>
+
+</body>
+</html>
