@@ -1,6 +1,7 @@
 package com.vispractice.pages;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -101,8 +102,10 @@ public class About
 		Iterator<Match> ui = mr.findAll().iterator();
 		while(ui.hasNext()){
 			Match m = (ui.next());
-			League l = lr.findOne(m.getLeague().getId());
+			League l = lr.findById(m.getLeague().getId());
 			l.getMatches().add(m);
+			//l.getMatches().clear();
+			
 			lr.save(l);
 		}
 	}
