@@ -21,14 +21,18 @@ public class Match extends AbstractPersistable<Long> {
 	private String name;
 	private String notes;
 	
-	@ManyToOne(optional = true)
+	@ManyToOne
     @JoinColumn(name = "leagueId")
 	private League league;
 	
-	@OneToOne(optional = true)  
+	@ManyToOne()
+    @JoinColumn(name = "cupId")
+	private Cup cup;
+	
+	@OneToOne
 	@JoinColumn(name = "homeTeamId")
 	private Team home;
-	@OneToOne(optional = true)  
+	@OneToOne
 	@JoinColumn(name = "guestTeamId")
 	private Team guest;
 

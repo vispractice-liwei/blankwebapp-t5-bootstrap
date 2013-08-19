@@ -7,7 +7,7 @@ import com.vispractice.domain.League;
 
 public interface LeagueRepository extends CrudRepository<League, Long> {
 
-	@Query("select u from League u JOIN FETCH u.matches where u.name = ? and u.season = ?")
+	@Query("select u from League u LEFT JOIN FETCH u.teams where u.name = ? and u.season = ?")
 	public League findByNameAndSeason(String name,String season);
 	
 	@Query("select u from League u LEFT JOIN FETCH u.matches where u.id = ?")

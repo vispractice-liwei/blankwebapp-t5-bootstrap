@@ -27,9 +27,9 @@ public class About
 	
 	@SetupRender
 	void before(){
-//		lr.save(generateLeagues());
-//		tr.save(generateTeams());
-//		mr.save(generateMatchs());
+		tr.save(generateTeams());
+		lr.save(generateLeagues());
+		mr.save(generateMatchs());
 	}
 	
 	@AfterRender
@@ -37,7 +37,6 @@ public class About
 //		dumpLeagues();
 //		dumpTeams();
 //		dumpMatches();
-		dumpMatchesToLeague();
 	}
 	
 	List<League> generateLeagues(){
@@ -71,8 +70,13 @@ public class About
 			l.setNotes(UUID.randomUUID().toString());
 			l.setHome(tr.findByName("T"+(int)(Math.random()*10)));
 			l.setGuest(tr.findByName("T"+(int)(Math.random()*10)));
-			l.setLeague(lr.findByNameAndSeason("L"+(int)(Math.random()*10), "2013"));
+			League lea = lr.findByNameAndSeason("L"+(int)(Math.random()*10), "2013");
+			lea.getTeams().add(l.getHome());
+			lea.getTeams().add(l.getGuest());
+			l.setLeague(lea);
 			ls.add(l);
+			
+			lr.save(lea);
 		}
 		return ls;
 	}
@@ -95,18 +99,6 @@ public class About
 		Iterator<Match> ui = mr.findAll().iterator();
 		while(ui.hasNext()){
 			System.out.println(ui.next());
-		}
-	}
-	
-	void dumpMatchesToLeague(){
-		Iterator<Match> ui = mr.findAll().iterator();
-		while(ui.hasNext()){
-			Match m = (ui.next());
-			League l = lr.findById(m.getLeague().getId());
-			l.getMatches().add(m);
-			//l.getMatches().clear();
-			
-			lr.save(l);
 		}
 	}
 }

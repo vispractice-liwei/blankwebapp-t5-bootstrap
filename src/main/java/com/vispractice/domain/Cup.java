@@ -6,17 +6,14 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class League extends AbstractPersistable<Long> {
+public class Cup extends AbstractPersistable<Long> {
 
-	private static final long serialVersionUID = 5287706568300678331L;
+	private static final long serialVersionUID = 3596967267270171866L;
 
 	@Column(unique = true)
 	private String uuid;
@@ -28,17 +25,14 @@ public class League extends AbstractPersistable<Long> {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "league")
 	private Set<Match> matches;
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "LEAGUE_TEAM", 
-		joinColumns = @JoinColumn(name = "LEAGUE_ID"), 
-		inverseJoinColumns = @JoinColumn(name = "TEAM_ID"))
+	@OneToMany(fetch = FetchType.LAZY)
 	private Set<Team> teams;
 
-	public League() {
+	public Cup() {
 		this(null);
 	}
 
-	public League(Long id) {
+	public Cup(Long id) {
 		this.setId(id);
 		this.setUuid(UUID.randomUUID().toString());
 	}
