@@ -51,4 +51,10 @@ public class Team extends AbstractPersistable<Long> {
 		this.notes = notes;
 	}
 
+	@Override
+	public String toString() {
+		return "Team [uuid=" + uuid + ", name=" + name + ", notes=" + notes
+				+ "]";
+	}
+
 }

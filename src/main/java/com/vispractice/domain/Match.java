@@ -25,10 +25,10 @@ public class Match extends AbstractPersistable<Long> {
     @JoinColumn(name = "leagueId")
 	private League league;
 	
-	@OneToOne(optional = false)  
+	@OneToOne(optional = true)  
 	@JoinColumn(name = "homeTeamId")
 	private Team home;
-	@OneToOne(optional = false)  
+	@OneToOne(optional = true)  
 	@JoinColumn(name = "guestTeamId")
 	private Team guest;
 
@@ -87,6 +87,13 @@ public class Match extends AbstractPersistable<Long> {
 
 	public void setGuest(Team guest) {
 		this.guest = guest;
+	}
+
+	@Override
+	public String toString() {
+		return "Match [uuid=" + uuid + ", name=" + name + ", notes=" + notes
+				+ ", league=" + league + ", home=" + home + ", guest=" + guest
+				+ "]";
 	}
 
 }

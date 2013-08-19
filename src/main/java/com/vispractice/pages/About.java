@@ -11,6 +11,7 @@ import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.SetupRender;
 
 import com.vispractice.domain.League;
+import com.vispractice.domain.Match;
 import com.vispractice.domain.Team;
 import com.vispractice.repository.LeagueRepository;
 import com.vispractice.repository.MatchRepository;
@@ -27,12 +28,15 @@ public class About
 	void before(){
 //		lr.save(generateLeagues());
 //		tr.save(generateTeams());
+//		mr.save(generateMatchs());
 	}
 	
 	@AfterRender
 	void after(){
-		dumpLeagues();
-		dumpTeams();
+//		dumpLeagues();
+//		dumpTeams();
+//		dumpMatches();
+		dumpMatchesToLeague();
 	}
 	
 	List<League> generateLeagues(){
@@ -57,6 +61,21 @@ public class About
 		return ls;
 	}
 	
+	List<Match> generateMatchs(){
+		
+		List<Match> ls = new ArrayList<Match>(10);
+		for(int j=0;j<10;j++){
+			Match l = new Match();
+			l.setName("M"+j);
+			l.setNotes(UUID.randomUUID().toString());
+			l.setHome(tr.findByName("T"+(int)(Math.random()*10)));
+			l.setGuest(tr.findByName("T"+(int)(Math.random()*10)));
+			l.setLeague(lr.findByNameAndSeason("L"+(int)(Math.random()*10), "2013"));
+			ls.add(l);
+		}
+		return ls;
+	}
+	
 	void dumpLeagues(){
 		Iterator<League> ui = lr.findAll().iterator();
 		while(ui.hasNext()){
@@ -68,6 +87,23 @@ public class About
 		Iterator<Team> ui = tr.findAll().iterator();
 		while(ui.hasNext()){
 			System.out.println(ui.next());
+		}
+	}
+	
+	void dumpMatches(){
+		Iterator<Match> ui = mr.findAll().iterator();
+		while(ui.hasNext()){
+			System.out.println(ui.next());
+		}
+	}
+	
+	void dumpMatchesToLeague(){
+		Iterator<Match> ui = mr.findAll().iterator();
+		while(ui.hasNext()){
+			Match m = (ui.next());
+			League l = lr.findOne(m.getLeague().getId());
+			l.getMatches().add(m);
+			lr.save(l);
 		}
 	}
 }
