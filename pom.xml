@@ -5,8 +5,8 @@
 	<artifactId>blankwebapp-t5-bootstrap</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>blankwebapp-t5-bootstrap Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<name>blankwebapp-t5-bootstrap</name>
+	<url>http://www.vispractice.com</url>
 	
 	<properties>
 		<spring.version>3.2.3.RELEASE</spring.version>
