@@ -1,7 +1,7 @@
 package com.vispractice.pages;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.SetupRender;
 
+import com.google.common.eventbus.EventBus;
 import com.vispractice.domain.League;
 import com.vispractice.domain.Match;
 import com.vispractice.domain.Team;
@@ -24,12 +25,14 @@ public class About
 	@Inject LeagueRepository lr;
 	@Inject MatchRepository mr;
 	@Inject TeamRepository tr;
+	@Inject EventBus eb;
 	
 	@SetupRender
 	void before(){
-		tr.save(generateTeams());
-		lr.save(generateLeagues());
-		mr.save(generateMatchs());
+//		tr.save(generateTeams());
+//		lr.save(generateLeagues());
+//		mr.save(generateMatchs());
+		eb.post(new EventObject("About"));
 	}
 	
 	@AfterRender

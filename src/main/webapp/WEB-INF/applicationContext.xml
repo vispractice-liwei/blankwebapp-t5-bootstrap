@@ -49,6 +49,6 @@
         <property name="password" value=""/>
     </bean>
     
-    <jpa:repositories base-package="com.vispractice.repository" />
+    <import resource="classpath:app.xml"/>
 
 </beans>
