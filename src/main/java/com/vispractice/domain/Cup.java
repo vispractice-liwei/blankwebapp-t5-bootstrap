@@ -3,46 +3,38 @@ package com.vispractice.domain;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+@Document
+public class Cup{
 
-@Entity
-public class Cup extends AbstractPersistable<Long> {
+	@Id
+	private String id;
 
-	private static final long serialVersionUID = 3596967267270171866L;
-
-	@Column(unique = true)
-	private String uuid;
-
+	@Indexed
 	private String name;
 	private String season;
 	
 	private double score;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "league")
+	@DBRef
 	private Set<Match> matches;
-	@OneToMany(fetch = FetchType.LAZY)
+	@DBRef
 	private Set<Team> teams;
 
 	public Cup() {
-		this(null);
+		this.setId(UUID.randomUUID().toString());
 	}
 
-	public Cup(Long id) {
-		this.setId(id);
-		this.setUuid(UUID.randomUUID().toString());
+	public String getId() {
+		return id;
 	}
 
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -87,7 +79,7 @@ public class Cup extends AbstractPersistable<Long> {
 
 	@Override
 	public String toString() {
-		return "League [uuid=" + uuid + ", name=" + name + ", season=" + season
+		return "Cup [id=" + id + ", name=" + name + ", season=" + season
 				+ ", score=" + score + "]";
 	}
 

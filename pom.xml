@@ -19,6 +19,7 @@
 		<jodatime.version>2.2</jodatime.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.data.jpa.version>1.3.4.RELEASE</spring.data.jpa.version>
+		<spring.data.mongodb.version>1.2.3.RELEASE</spring.data.mongodb.version>
 		<tapestry.jquery.version>3.3.6</tapestry.jquery.version>
 		<tapestry.version>5.3.6</tapestry.version>
 		<h2.version>1.3.173</h2.version>
@@ -66,6 +67,11 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${spring.data.jpa.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring.data.mongodb.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>

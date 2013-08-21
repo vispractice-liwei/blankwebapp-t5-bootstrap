@@ -1,7 +1,7 @@
 package com.vispractice.pages;
 
 import java.util.ArrayList;
-import java.util.EventObject;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -32,12 +32,12 @@ public class About
 //		tr.save(generateTeams());
 //		lr.save(generateLeagues());
 //		mr.save(generateMatchs());
-		eb.post(new EventObject("About"));
+//		eb.post(new EventObject("About"));
 	}
 	
 	@AfterRender
 	void after(){
-//		dumpLeagues();
+		dumpLeagues();
 //		dumpTeams();
 //		dumpMatches();
 	}
@@ -74,6 +74,9 @@ public class About
 			l.setHome(tr.findByName("T"+(int)(Math.random()*10)));
 			l.setGuest(tr.findByName("T"+(int)(Math.random()*10)));
 			League lea = lr.findByNameAndSeason("L"+(int)(Math.random()*10), "2013");
+			if(lea.getTeams() == null){
+				lea.setTeams(new HashSet<Team>());
+			}
 			lea.getTeams().add(l.getHome());
 			lea.getTeams().add(l.getGuest());
 			l.setLeague(lea);

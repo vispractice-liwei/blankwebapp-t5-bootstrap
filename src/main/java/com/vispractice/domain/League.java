@@ -3,52 +3,37 @@ package com.vispractice.domain;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+@Document
+public class League {
 
-@Entity
-public class League extends AbstractPersistable<Long> {
-
-	private static final long serialVersionUID = 5287706568300678331L;
-
-	@Column(unique = true)
-	private String uuid;
-
+	@Id
+	private String id;
+	@Indexed
 	private String name;
 	private String season;
-	
+
 	private double score;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "league")
+
+	@DBRef
 	private Set<Match> matches;
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "LEAGUE_TEAM", 
-		joinColumns = @JoinColumn(name = "LEAGUE_ID"), 
-		inverseJoinColumns = @JoinColumn(name = "TEAM_ID"))
+	@DBRef
 	private Set<Team> teams;
 
 	public League() {
-		this(null);
+		this.setId(UUID.randomUUID().toString());
 	}
 
-	public League(Long id) {
-		this.setId(id);
-		this.setUuid(UUID.randomUUID().toString());
+	public String getId() {
+		return id;
 	}
 
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -93,8 +78,9 @@ public class League extends AbstractPersistable<Long> {
 
 	@Override
 	public String toString() {
-		return "League [uuid=" + uuid + ", name=" + name + ", season=" + season
-				+ ", score=" + score + "]";
+		return "League [id=" + id + ", name=" + name + ", season=" + season
+				+ ", score=" + score + ", matches=" + matches + ", teams="
+				+ teams + "]";
 	}
 
 }

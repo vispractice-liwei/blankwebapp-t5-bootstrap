@@ -2,37 +2,25 @@ package com.vispractice.domain;
 
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+@Document
+public class Team {
 
-@Entity
-public class Team extends AbstractPersistable<Long> {
-
-	private static final long serialVersionUID = -7521673076229262431L;
-
-	@Column(unique = true)
-	private String uuid;
-
+	@Id
+	private String id;
+	@Indexed
 	private String name;
 	private String notes;
 
 	public Team() {
-		this(null);
+		this.setId(UUID.randomUUID().toString());
 	}
 
-	public Team(Long id) {
-		this.setId(id);
-		this.setUuid(UUID.randomUUID().toString());
-	}
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -53,7 +41,7 @@ public class Team extends AbstractPersistable<Long> {
 
 	@Override
 	public String toString() {
-		return "Team [uuid=" + uuid + ", name=" + name + ", notes=" + notes
+		return "Team [id=" + id + ", name=" + name + ", notes=" + notes
 				+ "]";
 	}
 
