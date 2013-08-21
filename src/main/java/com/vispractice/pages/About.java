@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.SetupRender;
+import org.springframework.data.domain.PageRequest;
 
 import com.google.common.eventbus.EventBus;
 import com.vispractice.domain.League;
@@ -44,7 +45,7 @@ public class About
 	
 	List<League> generateLeagues(){
 		List<League> ls = new ArrayList<League>(10);
-		for(int j=0;j<10;j++){
+		for(int j=0;j<100000;j++){
 			League l = new League();
 			l.setName("L"+j);
 			l.setSeason("2013");
@@ -67,13 +68,13 @@ public class About
 	List<Match> generateMatchs(){
 		
 		List<Match> ls = new ArrayList<Match>(10);
-		for(int j=0;j<10;j++){
+		for(int j=0;j<10000;j++){
 			Match l = new Match();
 			l.setName("M"+j);
 			l.setNotes(UUID.randomUUID().toString());
 			l.setHome(tr.findByName("T"+(int)(Math.random()*10)));
 			l.setGuest(tr.findByName("T"+(int)(Math.random()*10)));
-			League lea = lr.findByNameAndSeason("L"+(int)(Math.random()*10), "2013");
+			League lea = lr.findByNameAndSeason("L"+(int)(Math.random()*10000), "2013");
 			if(lea.getTeams() == null){
 				lea.setTeams(new HashSet<Team>());
 			}
@@ -88,7 +89,7 @@ public class About
 	}
 	
 	void dumpLeagues(){
-		Iterator<League> ui = lr.findAll().iterator();
+		Iterator<League> ui = lr.findAll(new PageRequest(87,23)).iterator();
 		while(ui.hasNext()){
 			System.out.println(ui.next());
 		}

@@ -4,11 +4,13 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
+@CompoundIndex(name="cup_name_season_index",def="{'name':1,'season':1}")
 public class Cup{
 
 	@Id
