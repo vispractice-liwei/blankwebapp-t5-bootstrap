@@ -1,5 +1,8 @@
 package com.vispractice.domain;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -24,9 +27,14 @@ public class Match {
 	private Team home;
 	@DBRef
 	private Team guest;
+	
+	private Date kickoff;
 
 	public Match() {
 		this.setId(UUID.randomUUID().toString());
+		try {
+			this.setKickoff(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-08-12 16:09:32"));
+		} catch (ParseException e) {}
 	}
 
 	public String getId() {
@@ -77,11 +85,27 @@ public class Match {
 		this.guest = guest;
 	}
 
+	public Cup getCup() {
+		return cup;
+	}
+
+	public void setCup(Cup cup) {
+		this.cup = cup;
+	}
+
+	public Date getKickoff() {
+		return kickoff;
+	}
+
+	public void setKickoff(Date kickoff) {
+		this.kickoff = kickoff;
+	}
+
 	@Override
 	public String toString() {
 		return "Match [id=" + id + ", name=" + name + ", notes=" + notes
-				+ ", league=" + league + ", home=" + home + ", guest=" + guest
-				+ "]";
+				+ ", league=" + league + ", cup=" + cup + ", home=" + home
+				+ ", guest=" + guest + ", kickoff=" + kickoff + "]";
 	}
 
 }

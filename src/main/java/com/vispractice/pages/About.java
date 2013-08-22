@@ -1,5 +1,7 @@
 package com.vispractice.pages;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -38,14 +40,14 @@ public class About
 	
 	@AfterRender
 	void after(){
-		dumpLeagues();
+//		dumpLeagues();
 //		dumpTeams();
-//		dumpMatches();
+		dumpMatches();
 	}
 	
 	List<League> generateLeagues(){
 		List<League> ls = new ArrayList<League>(10);
-		for(int j=0;j<100000;j++){
+		for(int j=0;j<1000;j++){
 			League l = new League();
 			l.setName("L"+j);
 			l.setSeason("2013");
@@ -68,13 +70,13 @@ public class About
 	List<Match> generateMatchs(){
 		
 		List<Match> ls = new ArrayList<Match>(10);
-		for(int j=0;j<10000;j++){
+		for(int j=0;j<1000;j++){
 			Match l = new Match();
 			l.setName("M"+j);
 			l.setNotes(UUID.randomUUID().toString());
 			l.setHome(tr.findByName("T"+(int)(Math.random()*10)));
 			l.setGuest(tr.findByName("T"+(int)(Math.random()*10)));
-			League lea = lr.findByNameAndSeason("L"+(int)(Math.random()*10000), "2013");
+			League lea = lr.findByNameAndSeason("L"+(int)(Math.random()*1000), "2013");
 			if(lea.getTeams() == null){
 				lea.setTeams(new HashSet<Team>());
 			}
@@ -103,9 +105,15 @@ public class About
 	}
 	
 	void dumpMatches(){
-		Iterator<Match> ui = mr.findAll().iterator();
-		while(ui.hasNext()){
-			System.out.println(ui.next());
+		try {
+
+			Match ui = mr.findByVersusId(
+					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").
+					parse("2013-08-12 16:09:32"), "M2",
+					"889fb49c-61f7-470f-ac4d-f302ee38693d");
+			System.out.println(ui);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 	}
 }
