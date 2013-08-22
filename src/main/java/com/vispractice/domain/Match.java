@@ -29,6 +29,9 @@ public class Match {
 	private Team guest;
 	
 	private Date kickoff;
+	
+	private Integer homeGoal;
+	private Integer guestGoal;
 
 	public Match() {
 		this.setId(UUID.randomUUID().toString());
@@ -99,6 +102,22 @@ public class Match {
 
 	public void setKickoff(Date kickoff) {
 		this.kickoff = kickoff;
+	}
+
+	public Integer getHomeGoal() {
+		return homeGoal;
+	}
+
+	public void setHomeGoal(Integer homeGoal) {
+		this.homeGoal = homeGoal;
+	}
+
+	public Integer getGuestGoal() {
+		return guestGoal;
+	}
+
+	public void setGuestGoal(Integer guestGoal) {
+		this.guestGoal = guestGoal;
 	}
 
 	@Override

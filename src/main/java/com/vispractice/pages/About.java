@@ -13,6 +13,8 @@ import javax.inject.Inject;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 
 import com.google.common.eventbus.EventBus;
 import com.vispractice.domain.League;
@@ -29,6 +31,7 @@ public class About
 	@Inject MatchRepository mr;
 	@Inject TeamRepository tr;
 	@Inject EventBus eb;
+	@Inject MongoTemplate mt;
 	
 	@SetupRender
 	void before(){
@@ -40,9 +43,9 @@ public class About
 	
 	@AfterRender
 	void after(){
-//		dumpLeagues();
-//		dumpTeams();
-		dumpMatches();
+		dumpLeagues();
+		dumpTeams();
+//		dumpMatches();
 	}
 	
 	List<League> generateLeagues(){
@@ -76,6 +79,8 @@ public class About
 			l.setNotes(UUID.randomUUID().toString());
 			l.setHome(tr.findByName("T"+(int)(Math.random()*10)));
 			l.setGuest(tr.findByName("T"+(int)(Math.random()*10)));
+			l.setHomeGoal((int)(Math.random()*1000));
+			l.setGuestGoal((int)(Math.random()*1000));
 			League lea = lr.findByNameAndSeason("L"+(int)(Math.random()*1000), "2013");
 			if(lea.getTeams() == null){
 				lea.setTeams(new HashSet<Team>());
@@ -91,14 +96,15 @@ public class About
 	}
 	
 	void dumpLeagues(){
-		Iterator<League> ui = lr.findAll(new PageRequest(87,23)).iterator();
+		Iterator<League> ui = mt.find(new BasicQuery("{'name':\"L148\"}").with(
+				new PageRequest(0,10)), League.class).iterator();
 		while(ui.hasNext()){
 			System.out.println(ui.next());
 		}
 	}
 	
 	void dumpTeams(){
-		Iterator<Team> ui = tr.findAll().iterator();
+		Iterator<Team> ui = tr.findByName2("T1", new PageRequest(0,10)).iterator();
 		while(ui.hasNext()){
 			System.out.println(ui.next());
 		}

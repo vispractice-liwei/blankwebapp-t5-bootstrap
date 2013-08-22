@@ -2,6 +2,5 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
 
-    <p>Contact com.vispractice ...</p>
-
+	<t:grid source="gds" t:rowsPerPage="25" class="table table-bordered"/>
 </html>
