@@ -2,5 +2,17 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
 
-	<t:grid source="gds" t:rowsPerPage="25" class="table table-bordered"/>
+	<t:grid source="gds" 
+			t:exclude="id" 
+			t:rowsPerPage="25" 
+			t:add="vs"
+			t:row="match"
+			class="table table-bordered">
+		<p:vsCell>
+			${match.home.name} vs ${match.guest.name}
+		</p:vsCell>
+		<p:kickoffCell>
+			<t:output value="match.kickoff" format="sdf"/>
+		</p:kickoffCell>
+	</t:grid>
 </html>
