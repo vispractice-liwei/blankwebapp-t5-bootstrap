@@ -36,6 +36,14 @@ public class MongoGridDataSource implements GridDataSource {
 		this.entityClass = entityClass;
 	}
 
+	public Criteria getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(Criteria criteria) {
+		this.criteria = criteria;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
