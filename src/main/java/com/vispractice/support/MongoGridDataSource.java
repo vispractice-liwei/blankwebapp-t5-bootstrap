@@ -5,6 +5,7 @@
 package com.vispractice.support;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.tapestry5.grid.GridDataSource;
@@ -27,13 +28,15 @@ public class MongoGridDataSource implements GridDataSource {
 	private Class entityClass;
 	private List list;
 	private int startIndex;
+	private IDataFilter filter;
 
 	public MongoGridDataSource(MongoTemplate template, Criteria criteria,
-			Class entityClass) {
+			Class entityClass,IDataFilter filter) {
 		super();
 		this.template = template;
 		this.criteria = criteria;
 		this.entityClass = entityClass;
+		this.filter = filter;
 	}
 
 	public Criteria getCriteria() {
@@ -87,6 +90,18 @@ public class MongoGridDataSource implements GridDataSource {
 		}
 
 		list = template.find(query, entityClass);
+		
+		if(filter != null){
+			Iterator it = list.iterator();
+			while(it.hasNext()){
+				Object data = it.next();
+				boolean suitable = filter.suitable(data);
+				if(!suitable){
+					it.remove();
+				}
+			}
+		}
+		
 		this.startIndex = startIndex;
 	}
 
@@ -108,6 +123,10 @@ public class MongoGridDataSource implements GridDataSource {
 	@Override
 	public Class getRowType() {
 		return entityClass;
+	}
+
+	public List getList() {
+		return list;
 	}
 
 }

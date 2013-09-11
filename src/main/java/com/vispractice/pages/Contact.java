@@ -40,7 +40,7 @@ public class Contact
 	
 	void setupRender(){
 		if(gds == null)
-			gds = new MongoGridDataSource(mt,new Criteria(),Match.class);
+			gds = new MongoGridDataSource(mt,new Criteria(),Match.class,null);
 		if(sm == null)
 			sm = new MongoSelectModel(mt,League.class);
 	}

@@ -1,13 +1,40 @@
-<html t:type="layout" title="t5-demo Index"
-	t:sidebarTitle="Framework Version"
+<html t:type="layout" title="Contact com.vispractice"
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
 	xmlns:p="tapestry:parameter">
-<!-- Most of the page content, including <head>, <body>, etc. tags, comes from Layout.tml -->
-
-<main class="bs-masthead" id="content" role="main">
-<div class="container">
-	<h2>Vispractice blank webapp with tapestry and Bootstrap</h2>
-</div>
-</main>
+<t:form>
+	<t:select t:id="league" t:value="leagueId" t:model="sm" t:zone="gzone" 
+		style="width: 20%;"/>
+	<hr />
+	<t:zone t:id="gzone">
+		<div>
+			<t:grid source="gds" t:rowsPerPage="25" 
+				t:row="reduced" t:add="inner"
+				class="table table-bordered">
+				
+				<p:innerCell>
+					<table>
+						<thead>
+							<tr>
+								<th>lea</th>
+								<th>match</th>
+								<th>hit</th>
+							</tr>
+						</thead>
+						<tbody>
+							<t:loop source="reduced.value.hitem" value="hitem">
+								<tr>
+									<td>${hitem.lea}</td>
+									<td>${hitem.match}</td>
+									<td>${hitem.hit}</td>
+								</tr>
+							</t:loop>
+						</tbody>
+					</table>
+				</p:innerCell>
+				
+			</t:grid>
+		</div>
+	</t:zone>
+</t:form>
 
 </html>

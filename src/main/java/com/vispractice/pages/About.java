@@ -38,7 +38,7 @@ public class About
 	void before(){
 //		tr.save(generateTeams());
 //		lr.save(generateLeagues());
-//		mr.save(generateMatchs());
+		mr.save(generateMatchs());
 //		eb.post(new EventObject("About"));
 	}
 	
@@ -74,14 +74,14 @@ public class About
 	List<Match> generateMatchs(){
 		
 		List<Match> ls = new ArrayList<Match>(10);
-		for(int j=0;j<1*10000;j++){
+		for(int j=0;j<1*1000;j++){
 			Match l = new Match();
 			l.setName("M"+j);
 			l.setHome(tr.findByName("T"+(int)(Math.random()*10)));
 			l.setGuest(tr.findByName("T"+(int)(Math.random()*10)));
 			l.setHomeGoal((int)(Math.random()*1000));
 			l.setGuestGoal((int)(Math.random()*1000));
-			League lea = lr.findByNameAndSeason("L"+(int)(Math.random()*1000), "2013");
+			League lea = lr.findByNameAndSeason("L"+(int)(Math.random()*200), "2013");
 			if(lea.getTeams() == null){
 				lea.setTeams(new HashSet<Team>());
 			}
@@ -98,7 +98,7 @@ public class About
 	}
 	
 	List<MItem> generateMItems(){
-		int randomCount = (int)(Math.random()*100);
+		int randomCount = (int)(Math.random()*20);
 		List<MItem> items = new ArrayList<MItem>(randomCount);
 		for(int j=0;j<randomCount;j++){
 			items.add(new MItem("item"+j,Math.random(),Math.random(),Math.random()

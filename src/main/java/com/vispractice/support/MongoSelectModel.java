@@ -39,8 +39,9 @@ public class MongoSelectModel extends AbstractSelectModel {
 				new Query(new Criteria()).with(new Sort(new Order(Direction.ASC,"name"))), entityClass);
 		for(Object obj : list){
 			try {
+				String name = Ognl.getValue("name", obj).toString();
 				options.add(new OptionModelImpl(
-						Ognl.getValue("name", obj).toString(),Ognl.getValue("id", obj)));
+						name,/*Ognl.getValue("id", obj)*/name));
 			} catch (OgnlException e) {
 				e.printStackTrace();
 			}
