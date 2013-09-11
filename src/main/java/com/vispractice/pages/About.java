@@ -18,6 +18,7 @@ import org.springframework.data.mongodb.core.query.BasicQuery;
 
 import com.google.common.eventbus.EventBus;
 import com.vispractice.domain.League;
+import com.vispractice.domain.MItem;
 import com.vispractice.domain.Match;
 import com.vispractice.domain.Team;
 import com.vispractice.repository.LeagueRepository;
@@ -43,8 +44,8 @@ public class About
 	
 	@AfterRender
 	void after(){
-		dumpLeagues();
-		dumpTeams();
+//		dumpLeagues();
+//		dumpTeams();
 //		dumpMatches();
 	}
 	
@@ -73,10 +74,9 @@ public class About
 	List<Match> generateMatchs(){
 		
 		List<Match> ls = new ArrayList<Match>(10);
-		for(int j=0;j<1000;j++){
+		for(int j=0;j<1*10000;j++){
 			Match l = new Match();
 			l.setName("M"+j);
-			l.setNotes(UUID.randomUUID().toString());
 			l.setHome(tr.findByName("T"+(int)(Math.random()*10)));
 			l.setGuest(tr.findByName("T"+(int)(Math.random()*10)));
 			l.setHomeGoal((int)(Math.random()*1000));
@@ -85,14 +85,26 @@ public class About
 			if(lea.getTeams() == null){
 				lea.setTeams(new HashSet<Team>());
 			}
-			lea.getTeams().add(l.getHome());
-			lea.getTeams().add(l.getGuest());
+			l.setNotes(lea.getName());
+//			lea.getTeams().add(l.getHome());
+//			lea.getTeams().add(l.getGuest());
 			l.setLeague(lea);
+			l.setItems(generateMItems());
 			ls.add(l);
 			
 			lr.save(lea);
 		}
 		return ls;
+	}
+	
+	List<MItem> generateMItems(){
+		int randomCount = (int)(Math.random()*100);
+		List<MItem> items = new ArrayList<MItem>(randomCount);
+		for(int j=0;j<randomCount;j++){
+			items.add(new MItem("item"+j,Math.random(),Math.random(),Math.random()
+					,Math.random(),Math.random(),Math.random()));
+		}
+		return items;
 	}
 	
 	void dumpLeagues(){

@@ -3,6 +3,7 @@ package com.vispractice.domain;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -32,6 +33,8 @@ public class Match {
 	
 	private Integer homeGoal;
 	private Integer guestGoal;
+	
+	private List<MItem> items;
 
 	public Match() {
 		this.setId(UUID.randomUUID().toString());
@@ -118,6 +121,14 @@ public class Match {
 
 	public void setGuestGoal(Integer guestGoal) {
 		this.guestGoal = guestGoal;
+	}
+
+	public List<MItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<MItem> items) {
+		this.items = items;
 	}
 
 	@Override

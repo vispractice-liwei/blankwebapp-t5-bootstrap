@@ -21,9 +21,7 @@ public class League {
 
 	private double score;
 
-	@DBRef
 	private Set<Match> matches;
-	@DBRef
 	private Set<Team> teams;
 
 	public League() {
